@@ -1913,26 +1913,147 @@ img, video {
   .why-matrix-grid { grid-template-columns: repeat(3, 1fr); }
   .recognition-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .contact-grid-layout { grid-template-columns: 1fr; gap: 40px; }
 }
 
 @media (max-width: 768px) {
-  .section { padding: 64px 0; }
+  .section { padding: 56px 0; }
+  .container { padding: 0 16px; }
   .top-bar { display: none; }
   .nav-links { display: none; }
   .btn-verify-cert { display: none; }
+  .btn-sidebar-toggle { padding: 7px 12px; font-size: 0.8rem; }
   .mobile-menu-btn { display: flex; }
+
+  /* Hero Mobile Refinements */
+  .hero-content { padding: 50px 0 70px 0; }
+  .hero-badge { font-size: 0.75rem; padding: 6px 14px; margin-bottom: 18px; }
+  .hero-title { font-size: clamp(2rem, 7vw, 2.75rem); line-height: 1.2; margin-bottom: 16px; }
+  .hero-subtitle-tagline { font-size: 1rem; margin-bottom: 12px; }
+  .hero-subtitle { font-size: 0.95rem; margin-bottom: 28px; line-height: 1.6; }
+  .hero-cta-group { flex-direction: column; width: 100%; gap: 12px; }
+  .hero-cta-group .btn { width: 100%; min-height: 48px; }
+  .hero-trust-bar { gap: 14px; padding-top: 20px; }
+  .hero-trust-item { font-size: 0.8rem; }
+
+  /* Grids & Cards */
   .about-stats-grid { grid-template-columns: repeat(2, 1fr); row-gap: 14px; }
-  .why-matrix-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-stat-num { font-size: 1.5rem; }
+  .why-matrix-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .scope-grid, .training-grid-pro { grid-template-columns: 1fr; gap: 20px; }
   .recognition-grid { grid-template-columns: 1fr; }
-  .marquee-mask-left, .marquee-mask-right { width: 48px; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .floating-wa-wrapper { bottom: 20px; left: 20px; }
-  .floating-back-to-top { bottom: 20px; right: 20px; }
+  
+  /* Touch target heights for mobile CTAs */
+  .btn, .btn-purple-inspection, .btn-training-enroll {
+    min-height: 46px;
+  }
+
+  /* Approvals Marquee Mobile: Swipe-Scrollable, No forced animation */
+  .section-approvals { padding: 56px 0; }
+  .marquee-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    padding: 10px 0 16px 0;
+    margin-bottom: 30px;
+    cursor: grab;
+  }
+  .marquee-wrapper::-webkit-scrollbar {
+    display: none; /* Safari/Chrome */
+  }
+  .marquee-mask-left, .marquee-mask-right { width: 28px; }
+  .marquee-track-container {
+    width: max-content;
+  }
+  .marquee-track {
+    animation: none;
+    padding-right: 12px;
+    gap: 12px;
+  }
+  .approval-card {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+  .approval-icon-box {
+    width: 38px;
+    height: 38px;
+  }
+  .approval-name {
+    font-size: 0.875rem;
+  }
+  .approval-sub {
+    font-size: 0.7rem;
+  }
+
+  /* Contact & Form on Mobile */
+  .contact-grid-layout { grid-template-columns: 1fr; gap: 32px; }
+  .proposal-card { padding: 24px 18px !important; border-radius: 16px !important; }
+  .proposal-form-row { grid-template-columns: 1fr !important; gap: 12px !important; margin-bottom: 12px !important; }
+  .contact-section-title { font-size: 1.75rem !important; }
+  .contact-section-desc { font-size: 0.95rem !important; }
+
+  /* Modals Mobile Friendly */
+  .modal-card { padding: 24px 18px; max-width: 94vw; }
+
+  /* Footer on Mobile */
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+
+  /* Floating Buttons */
+  .floating-wa-wrapper { bottom: 18px; left: 16px; }
+  .floating-wa-btn { width: 52px; height: 52px; }
+  .floating-back-to-top { bottom: 18px; right: 16px; width: 44px; height: 44px; }
 }
 
 @media (max-width: 480px) {
   .about-stats-grid { grid-template-columns: 1fr; row-gap: 12px; }
   .why-matrix-grid { grid-template-columns: 1fr; }
+  .filter-tab-btn { padding: 8px 14px; font-size: 0.8rem; }
+  .hero-trust-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .top-bar-socials, .social-icons-group { gap: 8px; }
+  .social-btn { width: 36px; height: 36px; }
+}
+
+/* Base definitions for Contact and Proposal Layout */
+.contact-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.proposal-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+}
+
+.proposal-card-title {
+  font-size: 1.35rem;
+  margin-bottom: 20px;
+  color: #0F172A;
+}
+
+.proposal-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.contact-section-title {
+  font-size: 2.35rem;
+  margin-bottom: 16px;
+  color: #0F172A;
+}
+
+.contact-section-desc {
+  color: #64748B;
+  font-size: 1.05rem;
+  margin-bottom: 28px;
 }
 
 @media (prefers-reduced-motion: reduce) {
