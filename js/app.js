@@ -84,8 +84,8 @@ function initSidebarDrawer() {
     });
   });
 
-  // Auto-close sidebar when clicking links inside it
-  const sidebarLinks = drawer?.querySelectorAll('.sidebar-menu-list a');
+  // Auto-close sidebar when clicking links inside it (including primary navigation)
+  const sidebarLinks = drawer?.querySelectorAll('.sidebar-menu-list a, .sidebar-main-links a');
   sidebarLinks?.forEach(link => {
     link.addEventListener('click', () => {
       closeSidebar();

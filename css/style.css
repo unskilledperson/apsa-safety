@@ -668,6 +668,39 @@ img, video {
   margin-bottom: 10px;
 }
 
+.sidebar-main-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar-main-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--slate-200);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all var(--transition-fast);
+}
+
+.sidebar-main-link svg {
+  color: var(--cyan-400);
+  flex-shrink: 0;
+}
+
+.sidebar-main-link:hover {
+  color: var(--white);
+  background: rgba(6, 182, 212, 0.15);
+  border-color: rgba(6, 182, 212, 0.35);
+  transform: translateX(4px);
+}
+
 .sidebar-accordion {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
@@ -1917,52 +1950,220 @@ img, video {
 }
 
 @media (max-width: 768px) {
-  .section { padding: 56px 0; }
-  .container { padding: 0 16px; }
+  .section { padding: 48px 0; }
+  .container { padding: 0 16px; width: 100%; max-width: 100%; }
   .top-bar { display: none; }
+  
+  /* Compact Mobile Sticky Navigation */
+  .main-nav {
+    position: sticky;
+    top: 0;
+  }
+  .nav-container { 
+    height: 64px; 
+  }
+  .brand-logo .logo-wrapper {
+    height: 38px;
+  }
   .nav-links { display: none; }
   .btn-verify-cert { display: none; }
-  .btn-sidebar-toggle { padding: 7px 12px; font-size: 0.8rem; }
-  .mobile-menu-btn { display: flex; }
-
-  /* Hero Mobile Refinements */
-  .hero-content { padding: 50px 0 70px 0; }
-  .hero-badge { font-size: 0.75rem; padding: 6px 14px; margin-bottom: 18px; }
-  .hero-title { font-size: clamp(2rem, 7vw, 2.75rem); line-height: 1.2; margin-bottom: 16px; }
-  .hero-subtitle-tagline { font-size: 1rem; margin-bottom: 12px; }
-  .hero-subtitle { font-size: 0.95rem; margin-bottom: 28px; line-height: 1.6; }
-  .hero-cta-group { flex-direction: column; width: 100%; gap: 12px; }
-  .hero-cta-group .btn { width: 100%; min-height: 48px; }
-  .hero-trust-bar { gap: 14px; padding-top: 20px; }
-  .hero-trust-item { font-size: 0.8rem; }
-
-  /* Grids & Cards */
-  .about-stats-grid { grid-template-columns: repeat(2, 1fr); row-gap: 14px; }
-  .about-stat-num { font-size: 1.5rem; }
-  .why-matrix-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  .scope-grid, .training-grid-pro { grid-template-columns: 1fr; gap: 20px; }
-  .recognition-grid { grid-template-columns: 1fr; }
-  
-  /* Touch target heights for mobile CTAs */
-  .btn, .btn-purple-inspection, .btn-training-enroll {
-    min-height: 46px;
+  .btn-sidebar-toggle { 
+    padding: 7px 12px; 
+    font-size: 0.78rem; 
+    gap: 6px;
+  }
+  .mobile-menu-btn { 
+    display: flex;
+    padding: 10px 8px;
+    min-height: 44px;
+    min-width: 44px;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* Approvals Marquee Mobile: Swipe-Scrollable, No forced animation */
-  .section-approvals { padding: 56px 0; }
+  /* Hero Mobile Typography & Visuals */
+  .hero-section {
+    min-height: auto;
+  }
+  .hero-content { 
+    padding: 36px 0 54px 0; 
+  }
+  .hero-badge { 
+    font-size: 0.7rem; 
+    padding: 6px 12px; 
+    margin-bottom: 16px; 
+    line-height: 1.35;
+    letter-spacing: 0.04em;
+    max-width: 100%;
+    white-space: normal;
+  }
+  .hero-title { 
+    font-size: clamp(1.85rem, 7.5vw, 2.45rem); 
+    line-height: 1.18; 
+    margin-bottom: 14px; 
+    letter-spacing: -0.02em;
+  }
+  .hero-subtitle-tagline { 
+    font-size: 0.925rem; 
+    line-height: 1.45;
+    margin-bottom: 12px; 
+  }
+  .hero-subtitle { 
+    font-size: 0.9rem; 
+    margin-bottom: 24px; 
+    line-height: 1.6; 
+  }
+  .hero-cta-group { 
+    flex-direction: column; 
+    width: 100%; 
+    gap: 12px; 
+    margin-bottom: 32px;
+  }
+  .hero-cta-group .btn { 
+    width: 100%; 
+    min-height: 50px; 
+    font-size: 0.95rem;
+  }
+  .hero-trust-bar { 
+    gap: 12px; 
+    padding-top: 18px; 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-trust-item { 
+    font-size: 0.8rem; 
+    gap: 8px;
+  }
+
+  /* Video Control Button on Mobile */
+  .video-control-btn {
+    bottom: 14px;
+    right: 14px;
+    padding: 6px 12px;
+    font-size: 0.72rem;
+  }
+
+  /* About Section on Mobile */
+  .about-main-img {
+    height: 260px;
+    border-radius: var(--radius-lg);
+  }
+  .about-stats-card { 
+    position: static; 
+    margin-top: 16px; 
+    padding: 16px 12px;
+  }
+  .about-stats-grid { 
+    grid-template-columns: repeat(3, 1fr); 
+    row-gap: 12px; 
+  }
+  .about-stat-num { 
+    font-size: 1.45rem; 
+  }
+  .about-stat-lbl {
+    font-size: 0.68rem;
+  }
+  .about-check-item {
+    font-size: 0.875rem;
+    gap: 10px;
+  }
+
+  /* Services & Training Section Mobile Ergonomics */
+  .service-filter-nav {
+    gap: 8px;
+    margin-bottom: 28px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .service-filter-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .filter-tab-btn {
+    padding: 8px 16px;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .scope-grid, 
+  .training-grid-pro { 
+    grid-template-columns: 1fr; 
+    gap: 20px; 
+  }
+  .scope-card,
+  .training-card-pro {
+    padding: 18px 16px;
+  }
+  .card-media-box {
+    height: 180px;
+    margin-bottom: 16px;
+  }
+  .scope-title, 
+  .training-title {
+    font-size: 1.18rem;
+  }
+  .scope-desc, 
+  .training-desc {
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+  .scope-standards {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .scope-std-pill {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+  }
+
+  /* Why Choose Us Matrix on Mobile */
+  .why-matrix-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 12px; 
+  }
+  .why-matrix-card {
+    padding: 20px 14px;
+  }
+  .why-matrix-num {
+    font-size: 2.2rem;
+  }
+  .why-matrix-label {
+    font-size: 0.75rem;
+  }
+
+  /* Touch target heights for mobile CTAs */
+  .btn, 
+  .btn-purple-inspection, 
+  .btn-training-enroll {
+    min-height: 48px;
+    width: 100%;
+    font-size: 0.925rem;
+    border-radius: var(--radius-md);
+  }
+
+  /* Approvals Marquee Mobile: Swipe-Scrollable with Natural Momentum */
+  .section-approvals { 
+    padding: 48px 0; 
+  }
   .marquee-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
-    padding: 10px 0 16px 0;
-    margin-bottom: 30px;
+    scrollbar-width: none;
+    padding: 8px 0 14px 0;
+    margin-bottom: 24px;
     cursor: grab;
   }
   .marquee-wrapper::-webkit-scrollbar {
-    display: none; /* Safari/Chrome */
+    display: none;
   }
-  .marquee-mask-left, .marquee-mask-right { width: 28px; }
+  .marquee-mask-left, 
+  .marquee-mask-right { 
+    width: 20px; 
+  }
   .marquee-track-container {
     width: max-content;
   }
@@ -1972,47 +2173,104 @@ img, video {
     gap: 12px;
   }
   .approval-card {
-    padding: 10px 16px;
-    gap: 12px;
+    padding: 10px 14px;
+    gap: 10px;
   }
   .approval-icon-box {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
   }
   .approval-name {
-    font-size: 0.875rem;
+    font-size: 0.825rem;
   }
   .approval-sub {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
   }
 
   /* Contact & Form on Mobile */
-  .contact-grid-layout { grid-template-columns: 1fr; gap: 32px; }
-  .proposal-card { padding: 24px 18px !important; border-radius: 16px !important; }
-  .proposal-form-row { grid-template-columns: 1fr !important; gap: 12px !important; margin-bottom: 12px !important; }
-  .contact-section-title { font-size: 1.75rem !important; }
-  .contact-section-desc { font-size: 0.95rem !important; }
+  .contact-grid-layout { 
+    grid-template-columns: 1fr; 
+    gap: 28px; 
+  }
+  .proposal-card { 
+    padding: 22px 16px !important; 
+    border-radius: 14px !important; 
+  }
+  .proposal-form-row { 
+    grid-template-columns: 1fr !important; 
+    gap: 12px !important; 
+    margin-bottom: 12px !important; 
+  }
+  .contact-section-title { 
+    font-size: 1.6rem !important; 
+    line-height: 1.25;
+  }
+  .contact-section-desc { 
+    font-size: 0.9rem !important; 
+    margin-bottom: 20px;
+  }
 
   /* Modals Mobile Friendly */
-  .modal-card { padding: 24px 18px; max-width: 94vw; }
+  .modal-card { 
+    padding: 24px 18px; 
+    max-width: 95vw; 
+    border-radius: var(--radius-md);
+  }
 
   /* Footer on Mobile */
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-  .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+  .site-footer { 
+    padding: 50px 0 24px 0; 
+  }
+  .footer-grid { 
+    grid-template-columns: 1fr; 
+    gap: 28px; 
+    margin-bottom: 36px;
+  }
+  .footer-bottom { 
+    flex-direction: column; 
+    text-align: center; 
+    gap: 10px; 
+    font-size: 0.8rem;
+  }
 
-  /* Floating Buttons */
-  .floating-wa-wrapper { bottom: 18px; left: 16px; }
-  .floating-wa-btn { width: 52px; height: 52px; }
-  .floating-back-to-top { bottom: 18px; right: 16px; width: 44px; height: 44px; }
+  /* Floating Action Buttons with Safe Margin */
+  .floating-wa-wrapper { 
+    bottom: 16px; 
+    left: 14px; 
+  }
+  .floating-wa-btn { 
+    width: 50px; 
+    height: 50px; 
+  }
+  .floating-back-to-top { 
+    bottom: 16px; 
+    right: 14px; 
+    width: 44px; 
+    height: 44px; 
+  }
 }
 
 @media (max-width: 480px) {
-  .about-stats-grid { grid-template-columns: 1fr; row-gap: 12px; }
-  .why-matrix-grid { grid-template-columns: 1fr; }
-  .filter-tab-btn { padding: 8px 14px; font-size: 0.8rem; }
-  .hero-trust-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .top-bar-socials, .social-icons-group { gap: 8px; }
-  .social-btn { width: 36px; height: 36px; }
+  .hero-trust-bar {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .about-stats-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    row-gap: 10px; 
+  }
+  .why-matrix-grid { 
+    grid-template-columns: 1fr; 
+  }
+  .top-bar-socials, 
+  .social-icons-group { 
+    gap: 8px; 
+    flex-wrap: wrap;
+  }
+  .social-btn { 
+    width: 38px; 
+    height: 38px; 
+  }
 }
 
 /* Base definitions for Contact and Proposal Layout */
