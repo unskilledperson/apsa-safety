@@ -36,13 +36,25 @@ function initSidebarDrawer() {
   const drawer = document.getElementById('sidebarDrawer');
   const backdrop = document.getElementById('sidebarBackdrop');
   const openButtons = document.querySelectorAll('.open-sidebar-btn');
+  const openProposalButtons = document.querySelectorAll('.open-proposal-btn');
   const closeButton = document.getElementById('sidebarCloseBtn');
 
-  function openSidebar() {
+  function openSidebar(focusConsultation = false) {
     if (drawer && backdrop) {
       drawer.classList.add('active');
       backdrop.classList.add('active');
       document.body.style.overflow = 'hidden';
+
+      if (focusConsultation) {
+        setTimeout(() => {
+          const consultationBlock = document.getElementById('sidebarConsultationBlock');
+          if (consultationBlock) {
+            consultationBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const firstInput = consultationBlock.querySelector('input');
+            if (firstInput) firstInput.focus();
+          }
+        }, 320);
+      }
     }
   }
 
@@ -57,7 +69,14 @@ function initSidebarDrawer() {
   openButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      openSidebar();
+      openSidebar(false);
+    });
+  });
+
+  openProposalButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openSidebar(true);
     });
   });
 
@@ -68,20 +87,6 @@ function initSidebarDrawer() {
     if (e.key === 'Escape' && drawer?.classList.contains('active')) {
       closeSidebar();
     }
-  });
-
-  // Sidebar Accordions (ABCON-style categories)
-  const accordions = document.querySelectorAll('.sidebar-accordion');
-  accordions.forEach(accordion => {
-    const trigger = accordion.querySelector('.accordion-trigger');
-    trigger?.addEventListener('click', () => {
-      const isOpen = accordion.classList.contains('open');
-      // Optional: Close other accordions
-      accordions.forEach(acc => acc.classList.remove('open'));
-      if (!isOpen) {
-        accordion.classList.add('open');
-      }
-    });
   });
 
   // Auto-close sidebar when clicking links inside it (including primary navigation)
@@ -235,35 +240,66 @@ function initCourseModal() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Contact & Quote Form Handler
+   6. Contact & Sidebar Consultation Form Handler
 -------------------------------------------------------------------------- */
 function initInquiryForm() {
+  // 1. Sidebar Consultation Form
+  const sidebarForm = document.getElementById('sidebarQuoteForm');
+  const sidebarToast = document.getElementById('sidebarFormToast');
+
+  if (sidebarForm) {
+    sidebarForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = sidebarForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `Submitting Request...`;
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        sidebarForm.reset();
+
+        if (sidebarToast) {
+          sidebarToast.style.display = 'block';
+          sidebarToast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+          setTimeout(() => {
+            sidebarToast.style.display = 'none';
+          }, 7000);
+        }
+      }, 850);
+    });
+  }
+
+  // 2. Fallback for Quote Form if present
   const form = document.getElementById('quoteForm');
   const toast = document.getElementById('formToast');
 
-  if (!form || !toast) return;
+  if (form && toast) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `Processing...`;
-
-    setTimeout(() => {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalText;
-      form.reset();
-
-      toast.style.display = 'flex';
-      toast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `Processing...`;
 
       setTimeout(() => {
-        toast.style.display = 'none';
-      }, 6000);
-    }, 1000);
-  });
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        form.reset();
+
+        toast.style.display = 'flex';
+        toast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 6000);
+      }, 1000);
+    });
+  }
 }
 
 /* --------------------------------------------------------------------------
