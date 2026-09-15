@@ -27,6 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 8. Interactive Services Category Filter Tabs
   initCategoryFilter();
+
+  // 9. Live Course Search Engine on Training Catalog Page
+  initCourseSearch();
+
+  // 10. Consultation Page Proposal Form Submission
+  initConsultationPageForm();
 });
 
 /* --------------------------------------------------------------------------
@@ -67,6 +73,8 @@ function initSidebarDrawer() {
       if (firstInput) {
         setTimeout(() => firstInput.focus(), 150);
       }
+    } else {
+      window.location.href = 'consultation.html';
     }
   }
 
@@ -85,6 +93,10 @@ function initSidebarDrawer() {
 
   openProposalButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
+      // Allow direct navigation if element is a link to consultation.html
+      if (btn.tagName === 'A' && btn.getAttribute('href')) {
+        return;
+      }
       e.preventDefault();
       openConsultationModal();
     });
@@ -379,9 +391,10 @@ function animateCounter(element, target) {
 -------------------------------------------------------------------------- */
 function initCategoryFilter() {
   const filterButtons = document.querySelectorAll('.filter-tab-btn');
-  const cards = document.querySelectorAll('.scope-card');
+  const scopeCards = document.querySelectorAll('.scope-card');
+  const trainingCards = document.querySelectorAll('.training-card-pro');
 
-  if (!filterButtons.length || !cards.length) return;
+  if (!filterButtons.length) return;
 
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -391,9 +404,9 @@ function initCategoryFilter() {
 
       const filter = btn.getAttribute('data-filter');
 
-      cards.forEach(card => {
+      // Filter scope cards (inspections) if present
+      scopeCards.forEach(card => {
         const category = card.getAttribute('data-category');
-
         if (filter === 'all' || category === filter) {
           card.style.display = 'flex';
           card.style.opacity = '0';
@@ -407,7 +420,125 @@ function initCategoryFilter() {
           card.style.display = 'none';
         }
       });
+
+      // Filter training cards if present and no custom search active
+      const searchInput = document.getElementById('courseSearchInput');
+      if (!searchInput) {
+        trainingCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
     });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   9. Live Course Search Engine on Training Catalog Page (100+ Courses)
+-------------------------------------------------------------------------- */
+function initCourseSearch() {
+  const searchInput = document.getElementById('courseSearchInput');
+  const trainingCards = document.querySelectorAll('.training-card-pro');
+  const filterButtons = document.querySelectorAll('.filter-tab-btn');
+  if (!trainingCards.length) return;
+
+  function filterCards() {
+    const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    const activeBtn = document.querySelector('.filter-tab-btn.active');
+    const activeCategory = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+
+    let matchCount = 0;
+
+    trainingCards.forEach(card => {
+      const cardCategory = card.getAttribute('data-category') || '';
+      const textContent = card.innerText.toLowerCase();
+
+      const matchesCategory = (activeCategory === 'all' || cardCategory === activeCategory);
+      const matchesSearch = (!query || textContent.includes(query));
+
+      if (matchesCategory && matchesSearch) {
+        card.style.display = 'flex';
+        matchCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Check for empty state notice
+    let emptyNotice = document.getElementById('courseEmptyState');
+    const container = document.getElementById('trainingCardsContainer');
+
+    if (matchCount === 0) {
+      if (!emptyNotice && container) {
+        emptyNotice = document.createElement('div');
+        emptyNotice.id = 'courseEmptyState';
+        emptyNotice.style.gridColumn = '1 / -1';
+        emptyNotice.style.textAlign = 'center';
+        emptyNotice.style.padding = '48px 20px';
+        emptyNotice.style.color = '#94A3B8';
+        emptyNotice.innerHTML = `
+          <div style="font-size: 2.5rem; margin-bottom: 12px;">🔍</div>
+          <h4 style="color: #FFFFFF; font-size: 1.25rem; margin-bottom: 8px;">No matching courses found</h4>
+          <p style="font-size: 0.95rem; max-width: 500px; margin: 0 auto 20px auto;">We provide over 100+ customized HSE and machinery courses. Contact our Dubai training directors for bespoke curriculum.</p>
+          <a href="https://wa.me/971561620009?text=Hello%2C%20I%E2%80%99m%20looking%20for%20a%20specific%20training%20course%20syllabus." target="_blank" rel="noopener noreferrer" class="btn btn-cyan btn-sm btn-pill">Ask on WhatsApp &rarr;</a>
+        `;
+        container.appendChild(emptyNotice);
+      } else if (emptyNotice) {
+        emptyNotice.style.display = 'block';
+      }
+    } else if (emptyNotice) {
+      emptyNotice.style.display = 'none';
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterCards);
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTimeout(filterCards, 10);
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   10. Consultation Page Proposal Form Submission
+-------------------------------------------------------------------------- */
+function initConsultationPageForm() {
+  const fullForm = document.getElementById('consultationFullForm');
+  if (!fullForm) return;
+
+  fullForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const submitBtn = fullForm.querySelector('button[type="submit"]');
+    const toast = document.getElementById('consultationPageToast');
+    if (!submitBtn) return;
+
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px;"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path></svg>
+      Submitting Official Proposal Request...
+    `;
+
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+      fullForm.reset();
+
+      if (toast) {
+        toast.style.display = 'block';
+        toast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 9000);
+      }
+    }, 850);
   });
 }
 
