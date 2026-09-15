@@ -39,22 +39,15 @@ function initSidebarDrawer() {
   const openProposalButtons = document.querySelectorAll('.open-proposal-btn');
   const closeButton = document.getElementById('sidebarCloseBtn');
 
-  function openSidebar(focusConsultation = false) {
+  // Dedicated Consultation & Proposal Modal Popup
+  const consultModal = document.getElementById('consultationModal');
+  const consultModalClose = document.getElementById('consultationModalClose');
+
+  function openSidebar() {
     if (drawer && backdrop) {
       drawer.classList.add('active');
       backdrop.classList.add('active');
       document.body.style.overflow = 'hidden';
-
-      if (focusConsultation) {
-        setTimeout(() => {
-          const consultationBlock = document.getElementById('sidebarConsultationBlock');
-          if (consultationBlock) {
-            consultationBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            const firstInput = consultationBlock.querySelector('input');
-            if (firstInput) firstInput.focus();
-          }
-        }, 320);
-      }
     }
   }
 
@@ -66,26 +59,49 @@ function initSidebarDrawer() {
     }
   }
 
+  function openConsultationModal() {
+    closeSidebar();
+    if (consultModal) {
+      consultModal.classList.add('open');
+      const firstInput = consultModal.querySelector('input');
+      if (firstInput) {
+        setTimeout(() => firstInput.focus(), 150);
+      }
+    }
+  }
+
+  function closeConsultationModal() {
+    if (consultModal) {
+      consultModal.classList.remove('open');
+    }
+  }
+
   openButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      openSidebar(false);
+      openSidebar();
     });
   });
 
   openProposalButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      openSidebar(true);
+      openConsultationModal();
     });
   });
 
   closeButton?.addEventListener('click', closeSidebar);
   backdrop?.addEventListener('click', closeSidebar);
 
+  consultModalClose?.addEventListener('click', closeConsultationModal);
+  consultModal?.addEventListener('click', (e) => {
+    if (e.target === consultModal) closeConsultationModal();
+  });
+
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawer?.classList.contains('active')) {
-      closeSidebar();
+    if (e.key === 'Escape') {
+      if (drawer?.classList.contains('active')) closeSidebar();
+      if (consultModal?.classList.contains('open')) closeConsultationModal();
     }
   });
 
@@ -240,10 +256,40 @@ function initCourseModal() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Contact & Sidebar Consultation Form Handler
+   6. Contact & Consultation Popup Form Handler
 -------------------------------------------------------------------------- */
 function initInquiryForm() {
-  // 1. Sidebar Consultation Form
+  // 1. Dedicated Consultation Modal Popup Form
+  const popupForm = document.getElementById('consultationPopupForm');
+  const popupToast = document.getElementById('popupToast');
+
+  if (popupForm) {
+    popupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = popupForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `Submitting Consultation Request...`;
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        popupForm.reset();
+
+        if (popupToast) {
+          popupToast.style.display = 'block';
+          popupToast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+          setTimeout(() => {
+            popupToast.style.display = 'none';
+          }, 8000);
+        }
+      }, 850);
+    });
+  }
+
+  // 2. Sidebar Quote Form (if present)
   const sidebarForm = document.getElementById('sidebarQuoteForm');
   const sidebarToast = document.getElementById('sidebarFormToast');
 
@@ -270,34 +316,6 @@ function initInquiryForm() {
           }, 7000);
         }
       }, 850);
-    });
-  }
-
-  // 2. Fallback for Quote Form if present
-  const form = document.getElementById('quoteForm');
-  const toast = document.getElementById('formToast');
-
-  if (form && toast) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `Processing...`;
-
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        form.reset();
-
-        toast.style.display = 'flex';
-        toast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-        setTimeout(() => {
-          toast.style.display = 'none';
-        }, 6000);
-      }, 1000);
     });
   }
 }

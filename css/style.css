@@ -1857,6 +1857,26 @@ img, video {
   color: var(--white);
 }
 
+.modal-card-lg {
+  max-width: 640px !important;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 640px) {
+  .modal-form-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
 /* --- 9. Social Media Connect Components & Badges --- */
 .social-icons-group {
   display: flex;
