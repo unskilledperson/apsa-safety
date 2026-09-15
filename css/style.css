@@ -2485,7 +2485,21 @@ img, video {
   }
   .contact-section-desc { 
     font-size: 0.9rem !important; 
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
+  }
+
+  /* Prevent iOS Safari auto-zoom on input focus */
+  .sidebar-input,
+  .proposal-card input,
+  .proposal-card select,
+  .proposal-card textarea,
+  .course-search-box input,
+  .consultation-form-card input,
+  .consultation-form-card select,
+  .consultation-form-card textarea,
+  .modal-card input,
+  .modal-card select {
+    font-size: 16px !important;
   }
 
   /* Modals Mobile Friendly */
@@ -2910,7 +2924,7 @@ img, video {
     padding: 24px 18px;
   }
   .course-search-box input {
-    font-size: 0.88rem;
+    font-size: 16px;
     padding: 12px 16px 12px 42px;
   }
 }
