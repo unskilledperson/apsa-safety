@@ -80,8 +80,103 @@
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="index.html#about" class="nav-link">About</a></li>
-        <li><a href="inspections.html" class="nav-link">Inspections</a></li>
-        <li><a href="training.html" class="nav-link">Training (100+)</a></li>
+        
+        <!-- Desktop Dropdown: Inspections -->
+        <li class="nav-item-dropdown">
+          <a href="inspections.html" class="nav-link nav-link-dropdown-btn">
+            <span>Inspections</span>
+            <svg class="chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <div class="nav-dropdown-menu dropdown-inspections" role="menu">
+            <div class="dropdown-header-label">
+              <span>Inspection Disciplines</span>
+              <span style="font-size: 0.68rem; opacity: 0.8;">EIAC &bull; ENAS</span>
+            </div>
+            <a href="inspections.html#disciplines" class="dropdown-item" role="menuitem">
+              <div class="dropdown-item-icon">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Lifting Equipment &amp; Cranes</span>
+                <span class="dropdown-item-sub">Mobile, Tower &amp; Overhead Cranes</span>
+              </div>
+            </a>
+            <a href="inspections.html#disciplines" class="dropdown-item" role="menuitem">
+              <div class="dropdown-item-icon">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Marine Bollard Pull Testing</span>
+                <span class="dropdown-item-sub">Offshore Vessels &amp; Calibrated Load Cells</span>
+              </div>
+            </a>
+            <a href="inspections.html#disciplines" class="dropdown-item" role="menuitem">
+              <div class="dropdown-item-icon">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">NDT Testing (MPI / UT / PT)</span>
+                <span class="dropdown-item-sub">Weld Integrity &amp; Flaw Detection</span>
+              </div>
+            </a>
+            <a href="inspections.html#disciplines" class="dropdown-item" role="menuitem">
+              <div class="dropdown-item-icon">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">BMU &amp; Suspended Cradles</span>
+                <span class="dropdown-item-sub">Facade Access Systems &amp; Man Baskets</span>
+              </div>
+            </a>
+            <a href="inspections.html" class="dropdown-footer-link">
+              <span>View All Inspection Services</span>
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </li>
+
+        <!-- Desktop Mega-Menu: Training (100+) -->
+        <li class="nav-item-dropdown">
+          <a href="training.html" class="nav-link nav-link-dropdown-btn">
+            <span>Training (100+)</span>
+            <svg class="chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <div class="nav-dropdown-menu dropdown-training-mega" role="menu">
+            <div>
+              <div class="dropdown-header-label">
+                <span>100+ Course Categories</span>
+                <span style="font-size: 0.68rem; opacity: 0.8;">KHDA &bull; Highfield</span>
+              </div>
+              <a href="training.html#courses" class="dropdown-item" role="menuitem">
+                <div class="dropdown-item-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                <div class="dropdown-item-content"><span class="dropdown-item-title">Lifting &amp; Rigging (22+ Courses)</span><span class="dropdown-item-sub">Rigger Level 1, 2, 3 &bull; LOLER Signals</span></div>
+              </a>
+              <a href="training.html#courses" class="dropdown-item" role="menuitem">
+                <div class="dropdown-item-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect></svg></div>
+                <div class="dropdown-item-content"><span class="dropdown-item-title">Heavy Plant &amp; Forklift (18+)</span><span class="dropdown-item-sub">Counterbalance, Reach Truck, MEWP</span></div>
+              </a>
+              <a href="training.html#courses" class="dropdown-item" role="menuitem">
+                <div class="dropdown-item-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                <div class="dropdown-item-content"><span class="dropdown-item-title">Working at Heights (16+)</span><span class="dropdown-item-sub">Scaffolding, Fall Arrest, Cradle BMU</span></div>
+              </a>
+              <a href="training.html#courses" class="dropdown-item" role="menuitem">
+                <div class="dropdown-item-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle></svg></div>
+                <div class="dropdown-item-content"><span class="dropdown-item-title">Emergency &amp; First Aid (14+)</span><span class="dropdown-item-sub">Fire Warden &bull; DCAS First Aid &bull; CPR</span></div>
+              </a>
+            </div>
+            <div class="dropdown-side-card">
+              <div>
+                <span class="section-badge" style="font-size: 0.68rem; padding: 3px 8px; margin-bottom: 8px;">Govt Accredited</span>
+                <h4>Corporate On-Site Training</h4>
+                <p>Tailored safety training batches at your warehouse, shipyard, or site across Dubai and the UAE.</p>
+              </div>
+              <a href="training.html" class="btn btn-cyan btn-sm btn-pill" style="width: 100%; justify-content: center; font-size: 0.82rem;">
+                Browse All 100+ Courses &rarr;
+              </a>
+            </div>
+          </div>
+        </li>
+
         <li><a href="index.html#why-us" class="nav-link">Why Us</a></li>
         <li><a href="index.html#contact" class="nav-link">Contact</a></li>
       </ul>
@@ -99,7 +194,7 @@
           Request Consultation
         </a>
 
-        <button class="mobile-menu-btn open-sidebar-btn" aria-label="Toggle navigation menu">
+        <button class="mobile-menu-btn open-sidebar-btn" aria-label="Toggle navigation menu" aria-controls="sidebarDrawer" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -110,7 +205,7 @@
 
   <!-- 3. Off-Canvas Sidebar Drawer for Mobile & Quick Navigation -->
   <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
-  <aside class="sidebar-drawer" id="sidebarDrawer" aria-label="Services and Navigation Drawer">
+  <aside class="sidebar-drawer" id="sidebarDrawer" aria-label="Mobile Navigation Drawer" aria-hidden="true">
     <div class="sidebar-header">
       <div class="sidebar-brand">
         <a href="index.html" class="logo-wrapper" style="height: 42px;" aria-label="Apsa Safety Consultancy Home">
@@ -128,8 +223,48 @@
         <ul class="sidebar-main-links">
           <li><a href="index.html" class="sidebar-main-link"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg> Home</a></li>
           <li><a href="index.html#about" class="sidebar-main-link"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> About APSA Safety</a></li>
-          <li><a href="inspections.html" class="sidebar-main-link"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Third-Party Inspections</a></li>
-          <li><a href="training.html" class="sidebar-main-link"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg> Accredited HSE Training (100+)</a></li>
+
+          <!-- Inspections Mobile Accordion -->
+          <li class="sidebar-accordion">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
+              <span style="display: flex; align-items: center; gap: 10px;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Third-Party Inspections
+              </span>
+              <svg class="chevron" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="accordion-panel">
+              <ul class="sidebar-menu-list">
+                <li><a href="inspections.html" style="color: var(--cyan-400); font-weight: 700;">&bull; View All Inspection Scope &rarr;</a></li>
+                <li><a href="inspections.html#disciplines">&bull; Lifting Equipment &amp; Cranes</a></li>
+                <li><a href="inspections.html#disciplines">&bull; Marine Bollard Pull Testing</a></li>
+                <li><a href="inspections.html#disciplines">&bull; NDT Testing (MPI / UT / PT)</a></li>
+                <li><a href="inspections.html#disciplines">&bull; BMU &amp; Suspended Cradles</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Training Mobile Accordion -->
+          <li class="sidebar-accordion">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
+              <span style="display: flex; align-items: center; gap: 10px;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path></svg>
+                Accredited Training (100+)
+              </span>
+              <svg class="chevron" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="accordion-panel">
+              <ul class="sidebar-menu-list">
+                <li><a href="training.html" style="color: var(--cyan-400); font-weight: 700;">&bull; Explore All 100+ Courses &rarr;</a></li>
+                <li><a href="training.html#courses">&bull; Lifting &amp; Rigging (22+)</a></li>
+                <li><a href="training.html#courses">&bull; Heavy Plant &amp; Forklifts (18+)</a></li>
+                <li><a href="training.html#courses">&bull; Working at Heights (16+)</a></li>
+                <li><a href="training.html#courses">&bull; Emergency &amp; First Aid (14+)</a></li>
+                <li><a href="training.html#courses">&bull; Confined Space &amp; HSE (20+)</a></li>
+              </ul>
+            </div>
+          </li>
+
           <li><a href="index.html#approvals" class="sidebar-main-link"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg> Official Accreditations</a></li>
           <li><a href="index.html#why-us" class="sidebar-main-link"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Why Choose Us</a></li>
           <li><a href="index.html#contact" class="sidebar-main-link"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg> Contact Us &amp; Support</a></li>

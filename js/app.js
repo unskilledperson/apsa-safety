@@ -49,20 +49,38 @@ function initSidebarDrawer() {
   const consultModal = document.getElementById('consultationModal');
   const consultModalClose = document.getElementById('consultationModalClose');
 
-  function openSidebar() {
+  let isDrawerOpen = false;
+
+  function setDrawerState(open) {
+    isDrawerOpen = open;
     if (drawer && backdrop) {
-      drawer.classList.add('active');
-      backdrop.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      if (open) {
+        drawer.classList.add('active');
+        backdrop.classList.add('active');
+        drawer.setAttribute('aria-hidden', 'false');
+        openButtons.forEach(btn => btn.setAttribute('aria-expanded', 'true'));
+        document.body.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
+
+        // Focus close button for accessibility
+        setTimeout(() => closeButton?.focus(), 120);
+      } else {
+        drawer.classList.remove('active');
+        backdrop.classList.remove('active');
+        drawer.setAttribute('aria-hidden', 'true');
+        openButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+        document.body.style.overflow = '';
+        document.body.style.touchAction = '';
+      }
     }
   }
 
+  function openSidebar() {
+    setDrawerState(true);
+  }
+
   function closeSidebar() {
-    if (drawer && backdrop) {
-      drawer.classList.remove('active');
-      backdrop.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+    setDrawerState(false);
   }
 
   function openConsultationModal() {
@@ -93,7 +111,6 @@ function initSidebarDrawer() {
 
   openProposalButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      // Allow direct navigation if element is a link to consultation.html
       if (btn.tagName === 'A' && btn.getAttribute('href')) {
         return;
       }
@@ -110,9 +127,44 @@ function initSidebarDrawer() {
     if (e.target === consultModal) closeConsultationModal();
   });
 
+  // Mobile Drawer Accordion Controller
+  const accordions = drawer?.querySelectorAll('.sidebar-accordion');
+  accordions?.forEach(acc => {
+    const trigger = acc.querySelector('.accordion-trigger');
+    const panel = acc.querySelector('.accordion-panel');
+
+    if (trigger && panel) {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = acc.classList.contains('open');
+
+        // Optional: Accordion mutual exclusion (close siblings)
+        accordions.forEach(otherAcc => {
+          if (otherAcc !== acc) {
+            otherAcc.classList.remove('open');
+            otherAcc.querySelector('.accordion-trigger')?.setAttribute('aria-expanded', 'false');
+            const otherPanel = otherAcc.querySelector('.accordion-panel');
+            if (otherPanel) otherPanel.style.display = 'none';
+          }
+        });
+
+        if (isOpen) {
+          acc.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+          panel.style.display = 'none';
+        } else {
+          acc.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+          panel.style.display = 'block';
+        }
+      });
+    }
+  });
+
+  // Keyboard accessibility
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      if (drawer?.classList.contains('active')) closeSidebar();
+      if (isDrawerOpen) closeSidebar();
       if (consultModal?.classList.contains('open')) closeConsultationModal();
     }
   });
